@@ -14,17 +14,16 @@
 		</style>
 	
 		Geben Sie eine Farbe ein:<br>
-		<input id="inpColor" type="color" name="pickercolor" value="#fe33c1" autofocus>
+		<input id="inpColor" type="color" name="pickercolor" value="#F600FF" autofocus>
+	
 		
-		<p id="colorHex">Colored Text</p>
-		<p id="colorRgb">Colored Text</p>
-		<p id="colorHsl">Colored Text</p>
+		<p id="colorHex"> </p>
+		<p id="colorRgb"> </p>
+		<p id="colorHsl"> </p>
+		<p id="test"> </p>
 		
 		
-<object
-  type="image/svg+xml" data="0019_gardenflowers_pattern_1.svg">
-  
-</object>		
+
 
 
 
@@ -34,16 +33,16 @@
 		<script>
 		"use strict";
 		
-		//var demo = document.getElementById("demo"); // 1
 		var displayColorHex = document.getElementById("colorHex");
 		var displayColorRgb =  document.getElementById("colorRgb");
         var displayColorHsl = document.getElementById("colorHsl");
-            
+		var testParagraph = document.getElementById("test");
         var inputColor = document.querySelectorAll("input");
 		var colorValueHex;
 		
 		
-
+		//----------------- Input der Farbe ------------------------
+		
 		function getColorHex(){  
             colorValueHex = document.getElementById("inpColor").value;
 			displayColorHex.innerHTML = colorValueHex;	
@@ -51,9 +50,6 @@
 				
 			};
 			
-		
-		
-		
 		//-------------- HEX in RGB --------------------------------
 		
 		function hexToRgb(){
@@ -85,7 +81,6 @@
 				}
 				h /= 6;
 			}
-
 			
             h = (h * 360).toFixed(0);
 			s = (s * 100).toFixed(0);
@@ -94,20 +89,43 @@
             return [h,s,l];
 		};
 		
-            
-            
-            
         function convertInputToHsl(){
             getColorHex();
             hexToRgb();
             rgbToHsl();
-            
+			generateAdjacentColors();
         }
-		 convertInputToHsl();       
+		
+		convertInputToHsl(); // Konvertieren der Default-Farbe
 		inputColor[0].addEventListener("change", convertInputToHsl);
         
+		//----------------- Algorithmus "Ähnliche Farben" --------------------
 		
+		function generateAdjacentColors(h1,s1,l1){
+			var h1 = Number(rgbToHsl()[0]), s1 = Number(rgbToHsl()[1]), l1 = Number(rgbToHsl()[2]);
+			var h2, s2, l2;
+			var h3, s3, l3;
+			var h4, s4, l4;
+			var h5, s5, l5;
+			var hArr = [h1,h2,h3,h4,h5];
+			//(h1 + 18 > 359) ? (h2 = (h1 + 18)%359) : (h2 = h1 + 18); 
 		
+			for (var i=1; i<5; i++) {  // generieren alle H
+			hArr[i] = hArr[i-1] + 18;
+			(hArr[i] > 359) ? (hArr[i] = hArr[i]%359) : (hArr[i]); // wenn h > 359, dann am Anfang des Farbkreises
+			};
+			
+			s2 = s3 = s4 = s5 = s1; 
+			(l1 < 10) ? (l2 = l1):(l2 = l1 - 5); // zu dunkel, um Unterschied zu erkennen, L bleibt unverändert
+			
+			
+			testParagraph.innerHTML = hArr; 
+			
+			//var hsl1 = rgbToHsl(), hsl2 = [], hsl3 = [], hsl4 = [], hsl5 = [], hsl6 = [];
+			
+			
+		};
+		generateAdjacentColors();
 			
 			
 		
