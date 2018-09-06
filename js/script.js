@@ -13,121 +13,47 @@
 	var color3 = document.getElementById("color3");
 	var color4 = document.getElementById("color4");
 	var color5 = document.getElementById("color5");
-	var colorSet = document.getElementsByClassName("colorSet");
+	var colors = document.getElementsByClassName("colorSet");
 	
+	//--------------- Objekt "Farbe in HSL" ------------------------
+	//--------------------------------------------------------------
 	
 	function ColorSet(h1,h2,h3,h4,h5,s1,s2,s3,s4,s5,l1,l2,l3,l4,l5) {
-		this.color1 = `hsl(${h1},${s1}%,${l1}%)`;
-		this.color2 = `hsl(${h2},${s2}%,${l2}%)`;
-		this.color3 = `hsl(${h3},${s3}%,${l3}%)`;
-		this.color4 = `hsl(${h4},${s4}%,${l4}%)`;
-		this.color5 = `hsl(${h5},${s5}%,${l5}%)`;
+		this[0] = `hsl(${h1},${s1}%,${l1}%)`;
+		this[1] = `hsl(${h2},${s2}%,${l2}%)`;
+		this[2] = `hsl(${h3},${s3}%,${l3}%)`;
+		this[3] = `hsl(${h4},${s4}%,${l4}%)`;
+		this[4] = `hsl(${h5},${s5}%,${l5}%)`;
 	};
 	
-	
-	
-	//----------------- Select der Harmonie---------------------
-	function getHarmony(){
-		colorHarmonyTyp = document.getElementById("inpHarmony").value;
-		
-		if (colorHarmonyTyp == "mono"){
-			color1.style.backgroundColor = generateMonoColors().color1;
-			color2.style.backgroundColor = generateMonoColors().color2;
-			color3.style.backgroundColor = generateMonoColors().color3;
-			color4.style.backgroundColor = generateMonoColors().color4;
-			color5.style.backgroundColor = generateMonoColors().color5;
-			
-			for (let i=0; i<document.getElementsByClassName("st0").length; i++) {
-				document.getElementsByClassName("st0")[i].style.fill = generateMonoColors().color1;
-			};
-			for (let i=0; i<document.getElementsByClassName("st1").length; i++) {
-				document.getElementsByClassName("st1")[i].style.fill = generateMonoColors().color2;
-			};
-			for (let i=0; i<document.getElementsByClassName("st2").length; i++) {
-				document.getElementsByClassName("st2")[i].style.fill = generateMonoColors().color3;
-			};
-			for (let i=0; i<document.getElementsByClassName("st3").length; i++) {
-				document.getElementsByClassName("st3")[i].style.fill = generateMonoColors().color4;
-			};
-			for (let i=0; i<document.getElementsByClassName("st4").length; i++) {
-				document.getElementsByClassName("st4")[i].style.fill = generateMonoColors().color5;
-			};
-			
-			
-			
-		} else if (colorHarmonyTyp == "adjacent") {
-			color1.style.backgroundColor = generateAdjacentColors().color1;
-			color2.style.backgroundColor = generateAdjacentColors().color2;
-			color3.style.backgroundColor = generateAdjacentColors().color3;
-			color4.style.backgroundColor = generateAdjacentColors().color4;
-			color5.style.backgroundColor = generateAdjacentColors().color5;
-			
-			for (let i=0; i<document.getElementsByClassName("st0").length; i++) {
-				document.getElementsByClassName("st0")[i].style.fill = generateAdjacentColors().color1;
-			};
-			for (let i=0; i<document.getElementsByClassName("st1").length; i++) {
-				document.getElementsByClassName("st1")[i].style.fill = generateAdjacentColors().color2;
-			};
-			for (let i=0; i<document.getElementsByClassName("st2").length; i++) {
-				document.getElementsByClassName("st2")[i].style.fill = generateAdjacentColors().color3;
-			};
-			for (let i=0; i<document.getElementsByClassName("st3").length; i++) {
-				document.getElementsByClassName("st3")[i].style.fill = generateAdjacentColors().color4;
-			};
-			for (let i=0; i<document.getElementsByClassName("st4").length; i++) {
-				document.getElementsByClassName("st4")[i].style.fill = generateAdjacentColors().color5;
-			};
-	
-		} else {
-			color1.style.backgroundColor = generateTriadeColors().color1;
-			color2.style.backgroundColor = generateTriadeColors().color2;
-			color3.style.backgroundColor = generateTriadeColors().color3;
-			color4.style.backgroundColor = generateTriadeColors().color4;
-			color5.style.backgroundColor = generateTriadeColors().color5;
-			
-			for (let i=0; i<document.getElementsByClassName("st0").length; i++) {
-				document.getElementsByClassName("st0")[i].style.fill = generateTriadeColors().color1;
-			};
-			for (let i=0; i<document.getElementsByClassName("st1").length; i++) {
-				document.getElementsByClassName("st1")[i].style.fill = generateTriadeColors().color2;
-			};
-			for (let i=0; i<document.getElementsByClassName("st2").length; i++) {
-				document.getElementsByClassName("st2")[i].style.fill = generateTriadeColors().color3;
-			};
-			for (let i=0; i<document.getElementsByClassName("st3").length; i++) {
-				document.getElementsByClassName("st3")[i].style.fill = generateTriadeColors().color4;
-			};
-			for (let i=0; i<document.getElementsByClassName("st4").length; i++) {
-				document.getElementsByClassName("st4")[i].style.fill = generateTriadeColors().color5;
-			};
-	
-		};
-		
-		return colorHarmonyTyp;
-	};
-	
-	//----------------- Input der Farbe ------------------------
+	//----------------- Input der Farbe ---------------------------
+	//-------------------------------------------------------------
 	
 	function getColorHex(){  
 		colorValueHex = document.getElementById("inpColor").value;
-		displayColorHex.innerHTML = colorValueHex;	
+		//displayColorHex.innerHTML = colorValueHex;	
 		return colorValueHex;
 			
 		};
 		
 	//-------------- HEX in RGB --------------------------------
-	
+	//----------------------------------------------------------
+	// Extract the RGB components of the hex color notation.
 	function hexToRgb(){
 	var colorRgb = getColorHex(); // green
 	var r = parseInt(colorRgb.substr(1,2), 16); //Umrechnung HEX in dezimal
 	var g = parseInt(colorRgb.substr(3,2), 16);
 	var b = parseInt(colorRgb.substr(5,2), 16);
-	displayColorRgb.innerHTML = [r,g,b];	
+	//displayColorRgb.innerHTML = [r,g,b];	
 	return [r, g, b];
 	
 	};
 	
-	// ------------- RGB in HSL --------------------------------
+	// ------------- RGB in HSL ------------------------------------
+	//--------------------------------------------------------------
+	
+	//The byte (0-255) representation of  color.
+	//Use the formulae from the Wikipedia article to calculate hue https://en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB
 	
 	function rgbToHsl(r, g, b){
 		var r = hexToRgb()[0] / 255, g = hexToRgb()[1] / 255, b = hexToRgb()[2] / 255;
@@ -150,7 +76,7 @@
 		h = (h * 360).toFixed(0);
 		s = (s * 100).toFixed(0);
 		l = (l * 100).toFixed(0);
-		displayColorHsl.innerHTML = [h,s,l];
+		//displayColorHsl.innerHTML = [h,s,l];
 		return [h,s,l];
 	};
 	
@@ -158,6 +84,8 @@
 	
 	
 	//----------------- Algorithmus "Ähnliche Farben" --------------------
+	//--------------------------------------------------------------------
+	
 	
 	function generateAdjacentColors(h1,s1,l1){
 		var h1 = Number(rgbToHsl()[0]), s1 = Number(rgbToHsl()[1]), l1 = Number(rgbToHsl()[2]);
@@ -193,6 +121,7 @@
 	
 		
 		//----------------- Algorithmus "Triade" --------------------
+		//-----------------------------------------------------------
 		
 		function generateTriadeColors(h1,s1,l1){
 			var h1 = Number(rgbToHsl()[0]), s1 = Number(rgbToHsl()[1]), l1 = Number(rgbToHsl()[2]);
@@ -225,6 +154,7 @@
 		};
 		
 		// ------------------------ Algorithmus "Monochromatisch" -----------------
+		//-------------------------------------------------------------------------
 		
 		function generateMonoColors(h1,s1,l1){
 			var h1 = Number(rgbToHsl()[0]), s1 = Number(rgbToHsl()[1]), l1 = Number(rgbToHsl()[2]);
@@ -247,8 +177,8 @@
 			s5 = s1;
 			
 			 
-			l4 = l1 + 8;
-			if (l4 > 93) {
+			l4 = l1 + 8; // wenn L mehr als 93 ist, dann zu hell
+			if (l4 > 93) { // und L soll von L1 substrahiert werden
 				l4 = l1 - 8;
 				l5 = l4 - 11;
 				l3 = l5 - 12;
@@ -276,46 +206,182 @@
 		
 		var currentCollection = new ColorSet(h1,h2,h3,h4,h5,s1,s2,s3,s4,s5,l1,l2,l3,l4,l5); 
 		return currentCollection;
+		
 		};
 		
+	
+	
+	
+	
+	//-------------------- Farbfelder colorieren -------------------------
+	//--------------------------------------------------------------------
+	
+	function paintSwatchesMono() {
+		var mono = generateMonoColors();
+		
+		for (let i=0; i<=4; i++) {
+			colors[i].style.backgroundColor = mono[i];
+			colors[i].innerHTML = mono[i];
+		};
+	
+		
+		
+	};
+	
+	function paintSwatchesAdjacent() {
+		var adjacent = generateAdjacentColors();
+		
+		for (let i=0; i<=4; i++) {
+			colors[i].style.backgroundColor = adjacent[i];
+			colors[i].innerHTML = adjacent[i];
+		};
+	
+		
+	};
+	
+	function paintSwatchesTriade() {
+		var triade = generateTriadeColors();
+		
+		for (let i=0; i<=4; i++) {
+			colors[i].style.backgroundColor = triade[i];
+			colors[i].innerHTML = triade[i];
+		};
+	};
+	
+	
+	//------------------------Muster colorieren -------------------------------
+	//-------------------------------------------------------------------------
+	
+	function paintPatternMono(){
+		var mono = generateMonoColors();
+		
+		
+		
+		for (let i=0; i<document.getElementsByClassName("st0").length; i++) {   // colorieren den Pattern
+				document.getElementsByClassName("st0")[i].style.fill = mono[0];  
+			};
+		for (let i=0; i<document.getElementsByClassName("st1").length; i++) {
+				document.getElementsByClassName("st1")[i].style.fill = mono[1];
+			};
+		for (let i=0; i<document.getElementsByClassName("st2").length; i++) {
+				document.getElementsByClassName("st2")[i].style.fill = mono[2];
+			};
+		for (let i=0; i<document.getElementsByClassName("st3").length; i++) {
+				document.getElementsByClassName("st3")[i].style.fill = mono[3];
+			};
+		for (let i=0; i<document.getElementsByClassName("st4").length; i++) {
+				document.getElementsByClassName("st4")[i].style.fill = mono[4];
+			};
+	};
+	
+	function paintPatternAdjacent() {
+		var adjacent = generateAdjacentColors();
+		for (let i=0; i<document.getElementsByClassName("st0").length; i++) {
+				document.getElementsByClassName("st0")[i].style.fill = adjacent[0];
+			};
+			for (let i=0; i<document.getElementsByClassName("st1").length; i++) {
+				document.getElementsByClassName("st1")[i].style.fill = adjacent[1];
+			};
+			for (let i=0; i<document.getElementsByClassName("st2").length; i++) {
+				document.getElementsByClassName("st2")[i].style.fill = adjacent[2];
+			};
+			for (let i=0; i<document.getElementsByClassName("st3").length; i++) {
+				document.getElementsByClassName("st3")[i].style.fill = adjacent[3];
+			};
+			for (let i=0; i<document.getElementsByClassName("st4").length; i++) {
+				document.getElementsByClassName("st4")[i].style.fill = adjacent[4];
+			};
+	};
+	
+	function paintPatternTriade() {
+		var triade = generateTriadeColors();
+		for (let i=0; i<document.getElementsByClassName("st0").length; i++) {
+				document.getElementsByClassName("st0")[i].style.fill = triade[0];
+			};
+			for (let i=0; i<document.getElementsByClassName("st1").length; i++) {
+				document.getElementsByClassName("st1")[i].style.fill = triade[1];
+			};
+			for (let i=0; i<document.getElementsByClassName("st2").length; i++) {
+				document.getElementsByClassName("st2")[i].style.fill = triade[2];
+			};
+			for (let i=0; i<document.getElementsByClassName("st3").length; i++) {
+				document.getElementsByClassName("st3")[i].style.fill = triade[3];
+			};
+			for (let i=0; i<document.getElementsByClassName("st4").length; i++) {
+				document.getElementsByClassName("st4")[i].style.fill = triade[4];
+			};
+	};
+	
+	
+	
 		// --------------------------- Farben Generieren ---------------------
-	function convertInputToHsl(){
+		//--------------------------------------------------------------------
+		
+	function convertInputToHsl(){ // wenn Benutzer Angabe mit Farbfeld macht
 		getColorHex();
 		hexToRgb();
 		rgbToHsl();
 		if (getHarmony() == "mono"){
-			color1.style.backgroundColor = generateMonoColors().color1;
-			color2.style.backgroundColor = generateMonoColors().color2;
-			color3.style.backgroundColor = generateMonoColors().color3;
-			color4.style.backgroundColor = generateMonoColors().color4;
-			color5.style.backgroundColor = generateMonoColors().color5;
+			paintSwatchesMono();
 		} else if (getHarmony() == "adjacent") {
-			color1.style.backgroundColor = generateAdjacentColors().color1;
-			color2.style.backgroundColor = generateAdjacentColors().color2;
-			color3.style.backgroundColor = generateAdjacentColors().color3;
-			color4.style.backgroundColor = generateAdjacentColors().color4;
-			color5.style.backgroundColor = generateAdjacentColors().color5;
+			paintSwatchesAdjacent();
 		} else {
-			color1.style.backgroundColor = generateTriadeColors().color1;
-			color2.style.backgroundColor = generateTriadeColors().color2;
-			color3.style.backgroundColor = generateTriadeColors().color3;
-			color4.style.backgroundColor = generateTriadeColors().color4;
-			color5.style.backgroundColor = generateTriadeColors().color5;
+			paintSwatchesTriade();
+		};
+	};
+	
+	//------------------------ Select der Harmonie---------------------
+	//-----------------------------------------------------------------
+	function getHarmony(){
+		colorHarmonyTyp = document.getElementById("inpHarmony").value; // wenn Benutzer eine Harmonie auswählt
+		if (colorHarmonyTyp == "mono"){
+			paintSwatchesMono();
+			paintPatternMono();
+		} else if (colorHarmonyTyp == "adjacent") {
+			paintSwatchesAdjacent();
+			paintPatternAdjacent();
+		} else {
+			paintSwatchesTriade();
+			paintPatternTriade();
 		};
 		
-		
-			
+		return colorHarmonyTyp;
 	};
-	
-	function paintPattern(){
-		document.getElementsByClassName("st0").setAttribute("fill", generateTriadeColors().color5);
-	};
-	
-	
-	
-	
-	testParagraph.innerHTML = convertInputToHsl.name;
 
+	//---------------------- HSL in HEX --------------------------------
+	//------ für Ausgabe des Farbcodes ---------------------------------
+	
+	function hslToHex(h, s, l) {
+		h /= 360;
+		s /= 100;
+		l /= 100;
+		let r, g, b;
+		if (s === 0) {
+			r = g = b = l; // achromatic
+		} else {
+			const hue2rgb = (p, q, t) => {
+				if (t < 0) t += 1;
+				if (t > 1) t -= 1;
+				if (t < 1 / 6) return p + (q - p) * 6 * t;
+				if (t < 1 / 2) return q;
+				if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+				return p;
+			};
+			const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+			const p = 2 * l - q;
+			r = hue2rgb(p, q, h + 1 / 3);
+			g = hue2rgb(p, q, h);
+			b = hue2rgb(p, q, h - 1 / 3);
+		}
+		const toHex = x => {
+		const hex = Math.round(x * 255).toString(16);
+		return hex.length === 1 ? '0' + hex : hex;
+		};
+	return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+};
+	
+	
+	//testParagraph.innerHTML = convertInputToHsl.name;
 	getHarmony(); 
 	convertInputToHsl(); // Konvertieren der Default-Farbe
 	selectHarmony[0].addEventListener("change", getHarmony);

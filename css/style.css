@@ -1,0 +1,125 @@
+body {
+	height:80vw;
+	 background-color: #666666;
+	 color: #fff;
+	 margin:0;
+	 font-family: 'Exo 2', sans-serif;
+	 box-sizing: border-box;
+}
+
+h1 {
+	font-family: 'Montserrat', sans-serif;
+	font-weight:700;
+	padding: 0 40px;
+}
+header {
+		background-color: #5FCEC0;
+		width:100%;
+		padding: 10px 0 10px 0;
+		background-image: url('../img/wheel-icon.png');
+		background-repeat: no-repeat;
+		background-size: 70px;
+		background-position: 15px
+	}
+#tools {
+		border: 1px #ccc;
+		border-style: none none solid none;
+		padding: 20px 30px;
+		position:relative;
+	}
+	
+ label {
+	 padding: 0 10px 0 20px;
+ }
+ #label1 {
+	  
+	 display: inline;
+	 line-height: 100px;
+	 white-space: nowrap;
+	 position: absolute;
+	 top: 0px;
+	 
+ }
+ #harmony {
+	 display: inline-block;
+	 right: 6%;
+	 line-height: 100px;
+	 white-space: nowrap;
+	 position: absolute;
+	 top: 0px;
+	 
+ }
+.color-wrapper {
+	display: inline-block;
+	height: 50px;
+	left: 30%;
+	
+	top:0;
+	
+}
+#inputColor {
+	display: inline-block;
+}
+select {
+	padding: 5px 5px;
+	}
+	
+input#inpColor {
+	padding: 0px 3px;
+	
+}
+input[type="color"] {
+	position: absolute;
+	-webkit-appearance: none;
+	border: none;
+	width: 50px;
+	height: 50px;
+	top: 25px;
+	left: 230px;
+	
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+	border: none;
+}
+
+#text {
+	padding: 0 25px;
+}
+
+div.colorSet {
+	
+	border: 1px solid #fff;
+	width: 150px;
+	height: 150px;
+	margin: 40px 1%;
+	border-radius: 50%;
+	display:inline-block;
+	line-height: 150px;
+	vertical-align: center;
+	}
+	.slidecontainer {
+		display: inline-block;
+		height: 150px;
+		margin: 0 1%;
+	}
+	
+.wrapper div {
+	
+}
+.wrapper {
+	position: relative;
+	text-align:center;
+	width: 100%;
+	height: 250px;
+	
+	}
+#wrap {
+
+}
+svg {
+	text-align:center;
+	};
+			
