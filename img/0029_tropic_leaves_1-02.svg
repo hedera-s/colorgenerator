@@ -1,69 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-   <meta charset="utf-8">
-   <title>Farbscheme für Patterns</title>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link href="https://fonts.googleapis.com/css?family=Exo+2:200|Montserrat:700" rel="stylesheet">
-</head>
-<body>	
-    
-		<header><h1>Color Generator</h1></header>
-	<div id="allWrapper">
-		<p id="text">
-			Hier können Sie sich verschiedene Color Schemes generieren lassen. <br>
-Sie sollen eine Farbe festlegen und weitere passende Farben werden von der App gesucht. Das basiert auf uralten gestalterischen Gesetzten (Triadie, Monochrome und Ähnliche Farben).
-		</p>
-		<div id="tools">
-	     
-		<div class="color-wrapper">
-			<div id="label1">
-				Geben Sie eine Farbe ein:
-			</div>
-			<div id="inputColor">
-			<input id="inpColor" type="color" name="pickercolor" value="#0080ff" autofocus>
-			</div>
-		</div>
-		<div id="harmony">
-		<label id="labe2">
-		Wählen Sie den Harmonietyp aus: 
-		</label>
-	    <select name="harmonies" id="inpHarmony">
-            <option value="adjacent">Ähnliche Farben</option>
-            <option value="mono">Monochromatische Farben</option>
-            <option value="triade">Triade</option>
-        </select>
-		</div>
-	</div>
-		
-		<div class="wrapper">
-			<div id="wrap">
-			<div id="color1" class="colorSet"> </div>
-			<div id="color2" class="colorSet"> </div>
-			<div id="color3" class="colorSet"> </div>
-			<div id="color4" class="colorSet"> </div>
-			<div id="color5" class="colorSet"> </div>
-			</div>
-		<!--	<div class="slidecontainer">
-				<input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-			</div>
-			<div class="slidecontainer">
-				<input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-			</div>
-			<div class="slidecontainer">
-				<input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-			</div>
-			<div class="slidecontainer">
-				<input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-			</div>
-			<div class="slidecontainer">
-				<input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-			</div>
-			
-		</div> -->
-        </div>
-    </div>
-        <?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 1000 390" style="enable-background:new 0 0 1000 390;" xml:space="preserve">
@@ -5519,8 +5454,3 @@ Sie sollen eine Farbe festlegen und weitere passende Farben werden von der App g
 	c-2.6274,0.4345-5.25,0.9008-7.8737,1.359c-0.6559,0.1144-1.3036,0.3253-1.9626,0.3649C11.8054,8.084,5.9226,9.9659,0,11.6702
 	v1.8167c2.594-0.7623,5.182-1.5446,7.7682-2.3269C11.3971,10.0622,15.1186,9.9285,18.7851,9.2824z"/>
 </svg>
-
-		<script src="js/script.js"></script>
-	
-</body>
-</html>
