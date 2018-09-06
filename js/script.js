@@ -15,10 +15,10 @@
 	var color5 = document.getElementById("color5");
 	var colors = document.getElementsByClassName("colorSet");
 	
-	//--------------- Objekt "Farbe in HSL" ------------------------
-	//--------------------------------------------------------------
+	//--------------- Objektkonstruktor "Farbe in HSL" ------------
+	//----------------Resultat als "hsl(123,12%,12%)"--------------
 	
-	function ColorSet(h1,h2,h3,h4,h5,s1,s2,s3,s4,s5,l1,l2,l3,l4,l5) {
+	function ColorSet(h1,h2,h3,h4,h5,s1,s2,s3,s4,s5,l1,l2,l3,l4,l5) { 
 		this[0] = `hsl(${h1},${s1}%,${l1}%)`;
 		this[1] = `hsl(${h2},${s2}%,${l2}%)`;
 		this[2] = `hsl(${h3},${s3}%,${l3}%)`;
@@ -39,6 +39,7 @@
 	//-------------- HEX in RGB --------------------------------
 	//----------------------------------------------------------
 	// Extract the RGB components of the hex color notation.
+
 	function hexToRgb(){
 	var colorRgb = getColorHex(); // green
 	var r = parseInt(colorRgb.substr(1,2), 16); //Umrechnung HEX in dezimal
@@ -53,7 +54,7 @@
 	//--------------------------------------------------------------
 	
 	//The byte (0-255) representation of  color.
-	//Use the formulae from the Wikipedia article to calculate hue https://en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB
+	//Used the formulae from the Wikipedia article to calculate hue https://en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB
 	
 	function rgbToHsl(r, g, b){
 		var r = hexToRgb()[0] / 255, g = hexToRgb()[1] / 255, b = hexToRgb()[2] / 255;
@@ -83,16 +84,14 @@
 	
 	
 	
-	//----------------- Algorithmus "Ähnliche Farben" --------------------
+	//----------------- Algorithm "Ähnliche Farben" --------------------
 	//--------------------------------------------------------------------
-	
+	//---h2 = h1+18, h3=h3+18 usw ----------------------------------------
+    //---alle S sind gleich
 	
 	function generateAdjacentColors(h1,s1,l1){
 		var h1 = Number(rgbToHsl()[0]), s1 = Number(rgbToHsl()[1]), l1 = Number(rgbToHsl()[2]);
-		var h2, s2, l2;
-		var h3, s3, l3;
-		var h4, s4, l4;
-		var h5, s5, l5;
+		var h2, s2, l2, h3, s3, l3, h4, s4, l4, h5, s5, l5;
 		var hArr = [h1,h2,h3,h4,h5];
 		
 		for (let i=1; i<5; i++) {  // generieren alle H
@@ -120,9 +119,9 @@
 	};
 	
 		
-		//----------------- Algorithmus "Triade" --------------------
+		//----------------- Algorithm "Triade" --------------------
 		//-----------------------------------------------------------
-		
+		//
 		function generateTriadeColors(h1,s1,l1){
 			var h1 = Number(rgbToHsl()[0]), s1 = Number(rgbToHsl()[1]), l1 = Number(rgbToHsl()[2]);
 			var h2, s2, l2;
@@ -153,7 +152,7 @@
 		return currentCollection;
 		};
 		
-		// ------------------------ Algorithmus "Monochromatisch" -----------------
+		// ------------------------ Algorithm "Monochromatisch" -----------------
 		//-------------------------------------------------------------------------
 		
 		function generateMonoColors(h1,s1,l1){
@@ -210,6 +209,42 @@
 		};
 		
 	
+    // --------------------------- Farben Generieren ---------------------
+	//--------------------------------------------------------------------
+    // wenn Benutzer Angabe mit Farbfeld macht
+		
+	function convertInputToHsl(){ 
+		getColorHex();
+		hexToRgb();
+		rgbToHsl();
+		if (getHarmony() == "mono"){
+			paintSwatchesMono();
+		} else if (getHarmony() == "adjacent") {
+			paintSwatchesAdjacent();
+		} else {
+			paintSwatchesTriade();
+		};
+	};
+	
+	//------------------------ Select der Harmonie---------------------
+	//-----------------------------------------------------------------
+    //wenn Benutzer eine Harmonie auswählt
+
+	function getHarmony(){
+		colorHarmonyTyp = document.getElementById("inpHarmony").value; 
+		if (colorHarmonyTyp == "mono"){
+			paintSwatchesMono();
+			paintPatternMono();
+		} else if (colorHarmonyTyp == "adjacent") {
+			paintSwatchesAdjacent();
+			paintPatternAdjacent();
+		} else {
+			paintSwatchesTriade();
+			paintPatternTriade();
+		};
+		
+		return colorHarmonyTyp;
+	};
 	
 	
 	
@@ -224,8 +259,6 @@
 			colors[i].innerHTML = mono[i];
 		};
 	
-		
-		
 	};
 	
 	function paintSwatchesAdjacent() {
@@ -248,6 +281,7 @@
 		};
 	};
 	
+
 	
 	//------------------------Muster colorieren -------------------------------
 	//-------------------------------------------------------------------------
@@ -255,9 +289,7 @@
 	function paintPatternMono(){
 		var mono = generateMonoColors();
 		
-		
-		
-		for (let i=0; i<document.getElementsByClassName("st0").length; i++) {   // colorieren den Pattern
+		for (let i=0; i<document.getElementsByClassName("st0").length; i++) {   
 				document.getElementsByClassName("st0")[i].style.fill = mono[0];  
 			};
 		for (let i=0; i<document.getElementsByClassName("st1").length; i++) {
@@ -314,39 +346,6 @@
 	
 	
 	
-		// --------------------------- Farben Generieren ---------------------
-		//--------------------------------------------------------------------
-		
-	function convertInputToHsl(){ // wenn Benutzer Angabe mit Farbfeld macht
-		getColorHex();
-		hexToRgb();
-		rgbToHsl();
-		if (getHarmony() == "mono"){
-			paintSwatchesMono();
-		} else if (getHarmony() == "adjacent") {
-			paintSwatchesAdjacent();
-		} else {
-			paintSwatchesTriade();
-		};
-	};
-	
-	//------------------------ Select der Harmonie---------------------
-	//-----------------------------------------------------------------
-	function getHarmony(){
-		colorHarmonyTyp = document.getElementById("inpHarmony").value; // wenn Benutzer eine Harmonie auswählt
-		if (colorHarmonyTyp == "mono"){
-			paintSwatchesMono();
-			paintPatternMono();
-		} else if (colorHarmonyTyp == "adjacent") {
-			paintSwatchesAdjacent();
-			paintPatternAdjacent();
-		} else {
-			paintSwatchesTriade();
-			paintPatternTriade();
-		};
-		
-		return colorHarmonyTyp;
-	};
 
 	//---------------------- HSL in HEX --------------------------------
 	//------ für Ausgabe des Farbcodes ---------------------------------
@@ -381,7 +380,7 @@
 };
 	
 	
-	//testParagraph.innerHTML = convertInputToHsl.name;
+	
 	getHarmony(); 
 	convertInputToHsl(); // Konvertieren der Default-Farbe
 	selectHarmony[0].addEventListener("change", getHarmony);
